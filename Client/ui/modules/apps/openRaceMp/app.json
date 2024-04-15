@@ -1,0 +1,15 @@
+{
+  "domElement": "<open-race-mp></open-race-mp>",
+  "name": "OpenRaceMP",
+  "description": "Let's you setup races, and see the results",
+  "css": {
+    "width": "300px",
+    "height": "400px",
+    "top": "100px",
+    "right": "0px"
+  },
+  "author": "irgendeinich",
+  "version": "1,0",
+  "preserveAspectRatio": false,
+  "directive": "openRaceMp"
+}

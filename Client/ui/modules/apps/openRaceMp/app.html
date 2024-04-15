@@ -1,0 +1,58 @@
+<div ng-controller="OpenRaceMp" id="OpenRaceMp" class="openRaceMp" style="min-height: 200px; overflow-y:auto"
+  ng-style="{'background-color': 'rgba(0, 0, 0, 0)', 'height': '100%'}" bng-nav-scroll>
+  <style>
+    #main {
+      background-color: rgba(0, 0, 0, .5);
+      color: white;
+      padding: 8px;
+    }
+
+    button {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 4px 8px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 12px;
+      cursor: pointer;
+    }
+  </style>
+  <div id="main">
+    <h3>Open Race MP</h3>
+    <div id="waitingMode" ng-style="{'display': currentState == 'waiting' ? 'block' : 'none'}">
+      <h4>Waiting for Host to Setup Race</h4>
+    </div>
+    <div id="waitingMode" ng-style="{'display': currentState == 'countdown' ? 'block' : 'none'}">
+      <h4>Get Ready to Race!</h4>
+    </div>
+    <div id="setupMode" ng-style="{'display': currentState == 'setup' || currentState == 'end' ? 'block' : 'none'}">
+      <h4>Setup</h4>
+
+      <button ng-click="startRace()">Start Race</button>
+      <p ng-repeat="track in tracks">
+        <button ng-click="loadTrack(track.path)">Load Track {{track.name | translate}}</button>
+      </p>
+    </div>
+    <div id="raceMode" ng-style="{'display': currentState == 'racing' || currentState == 'end'  ? 'block' : 'none'}">
+      <h4>Lap {{ currentLap }} / {{ lapCount }}</h4>
+      <p>Total: {{ (raceTimeTotal | date: "mm:ss:sss") || "--:--:---" }}</p>
+      <p>Current Lap: {{ (raceTimeLap | date: "mm:ss:sss") || "--:--:---" }}</p>
+      <div ng-style="{'display': nextWaypoint  ? 'block' : 'none'}">
+        <h5>Upcoming Waypoint {{ nextWaypoint }}</h5>
+        <ol>
+          <li ng-repeat="timing in nextWaypointTimings track by $index"> {{ timing.playerName }} {{ timing.time *
+            1000 | date: "mm:ss:sss" }}</li>
+        </ol>
+      </div>
+      <div ng-style="{'display': previousWaypoint  ? 'block' : 'none'}">
+        <h5>Previous Waypoint {{ previousWaypoint }}</h5>
+        <ol>
+          <li ng-repeat="timing in previousWaypointTimings track by $index">{{ timing.playerName }} - {{ timing.time *
+            1000 | date: "mm:ss:sss" }}</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
